@@ -1,0 +1,24 @@
+const students = [
+  { name: "Alice", chemistry: 85, biology: 90, dob: "01-05-2003" },
+  { name: "Bob", chemistry: 80, biology: 85, dob: "10-03-2003" },
+  { name: "Charlie", chemistry: 85, biology: 90, dob: "05-05-2002" },
+  // Add additional students as needed for testing
+];
+
+function parseDate(dateStr) {
+  const [day, month, year] = dateStr.split("-").map(Number);
+  return new Date(year, month - 1, day);
+}
+
+students.sort((a, b) => {
+  const totalMarksA = a.chemistry + a.biology;
+  const totalMarksB = b.chemistry + b.biology;
+
+  if (totalMarksA !== totalMarksB) return totalMarksB - totalMarksA;
+
+  if (a.biology !== b.biology) return b.biology - a.biology;
+
+  return parseDate(a.dob) - parseDate(b.dob);
+});
+
+console.log(students);
